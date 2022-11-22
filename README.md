@@ -27,8 +27,9 @@ The task is:
 1. Clone this repository: git clone https://github.com/DariaUtkinaEj/amo-leads-getter
 2. Copy .env file: cp .env.example .env
 3. Set the environment variables in .env file
-4. This and all next commands should be run in / project directory. Run migration: php artisan migrate
-5. Run this command to get data from amo api: php artisan update:lead
+4. This and all next commands should be run in / project directory. Install composer dependencies: run: composer install
+5. Run migration: php artisan migrate
+6. Run this command to get data from amo api: php artisan update:lead
 
 // Using OpenServer, PgAdmin or Adminer you can see database with all tables in your web browser.
 OR you should RUN this command to check database: pg_dump -U postgres -W postgres > /path/name.sql . Set path and name as you wish.
@@ -42,7 +43,7 @@ OR you should RUN this command to check database: pg_dump -U postgres -W postgre
 5. Run command: docker-compose up --build -d
 6. Run the container in bash mode: docker exec -it php /bin/sh
 7. Inside this container now you can run all the commands as if you are on local environment:
-Run: Install composer dependencies: composer install
+Install composer dependencies: composer install
 8. Run: php artisan migrate
 9. Run this command: php artisan update:lead
 10. Run this command: pg_dump -U postgres -W postgres > /path/name.sql (or configure Adminer)
