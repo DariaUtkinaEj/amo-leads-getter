@@ -15,9 +15,8 @@ services:
             - ./docker/logs/nginx:/var/logs/nginx:rw
         depends_on:
             - php
-            - db
         networks:
-            - internal
+            - app-network
 
     php:
         container_name: php
@@ -31,8 +30,7 @@ services:
         depends_on:
             - db
         networks:
-            - internal
-
+            - app-network
 
     db:
         image: postgres:12.3-alpine
@@ -48,7 +46,7 @@ services:
             POSTGRES_DB: amo2
             POSTGRES_HOST_AUTH_METHOD: "trust"
         networks:
-            - internal
+            - app-network
 
     adminer:
         image: adminer
@@ -59,13 +57,8 @@ services:
         ports:
             - "8888:80"
         networks:
-            - internal
+            - app-network
 
 networks:
-    internal:
+    app-network:
         driver: bridge
-        ipam:
-            driver: default
-            config:
-                - subnet: 192.168.65.0/24
-
