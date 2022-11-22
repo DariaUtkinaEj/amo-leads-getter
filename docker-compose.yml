@@ -15,8 +15,9 @@ services:
             - ./docker/logs/nginx:/var/logs/nginx:rw
         depends_on:
             - php
-       # networks:
-        #    - internal
+            - db
+        networks:
+            - internal
 
     php:
         container_name: php
@@ -29,8 +30,8 @@ services:
             - ./:/var/www
         depends_on:
             - db
-       # networks:
-        #    - internal
+        networks:
+            - internal
 
 
     db:
@@ -38,7 +39,7 @@ services:
         container_name: db
         restart: unless-stopped
         ports:
-            - "5433:5432"
+            - "5432:5432"
         volumes:
             - ./docker/postgres:/var/lib/postgresql/data
         environment:
@@ -46,8 +47,8 @@ services:
             POSTGRES_PASSWORD: postgres
             POSTGRES_DB: amo2
             POSTGRES_HOST_AUTH_METHOD: "trust"
-       # networks:
-        #    - internal
+        networks:
+            - internal
 
     adminer:
         image: adminer
@@ -56,8 +57,15 @@ services:
         depends_on:
             - db
         ports:
-            - "8001:80"
-       # networks:
-       #     - internal
+            - "8888:80"
+        networks:
+            - internal
 
+networks:
+    internal:
+        driver: bridge
+        ipam:
+            driver: default
+            config:
+                - subnet: 192.168.65.0/24
 
