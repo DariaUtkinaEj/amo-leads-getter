@@ -1,0 +1,63 @@
+version: '3'
+
+services:
+
+    nginx:
+        image: nginx:stable-alpine
+        container_name: nginx
+        ports:
+            - "8080:80"
+        links:
+            - php
+        volumes:
+            - ./:/var/www/html
+            - ./docker/nginx/site.conf:/etc/nginx/conf.d/default.conf:rw
+            - ./docker/logs/nginx:/var/logs/nginx:rw
+        depends_on:
+            - php
+       # networks:
+        #    - internal
+
+    php:
+        container_name: php
+        build:
+            context: docker/php-fpm
+            dockerfile: Dockerfile
+        ports:
+            - 9000:9000
+        volumes:
+            - ./:/var/www
+        depends_on:
+            - db
+       # networks:
+        #    - internal
+
+
+    db:
+        image: postgres:12.3-alpine
+        container_name: db
+        restart: unless-stopped
+        ports:
+            - "5433:5432"
+        volumes:
+            - ./docker/postgres:/var/lib/postgresql/data
+        environment:
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: postgres
+            POSTGRES_DB: amo2
+            POSTGRES_HOST_AUTH_METHOD: "trust"
+       # networks:
+        #    - internal
+
+    adminer:
+        image: adminer
+        restart: always
+        container_name: amo_adminer
+        depends_on:
+            - db
+        ports:
+            - "8001:80"
+       # networks:
+       #     - internal
+
+

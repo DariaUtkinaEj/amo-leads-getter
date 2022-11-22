@@ -1,64 +1,46 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+### amo-leads-getter - this is my test project.
+The task is:
+"Создать приложение (желательно в докере) на Laravel, которое будет выгружать сделки и связанные с ними сущности из amoCRM в базу данных. Способ реализации по желанию
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Требования:
 
-## About Laravel
+⁃ Использовать тестовую учётку, зарегистрировавшись на https://www.amocrm.ru
+⁃ В работе с API использовать библиотеку https://github.com/amocrm/amocrm-api-php
+⁃ БД на PostgreSQL
+⁃ В базе не должно быть дублей: 1 сущность - 1 запись
+⁃ Обеспечить целостность данных
+Прислать ссылку на репозиторий с кодом".
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Tools:
+* Nginx - is for webserver
+* PostgreSQL 10-12.3 - is for database
+* PHP8.0 
+* Laravel8
+* composer is for creating laravel-project
+* artisan 
+* docker & docker-compose
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Installation:
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+* The first way is installation without Docker:
 
-## Learning Laravel
+1. Clone this repository: git clone https://github.com/DariaUtkinaEj/amo-leads-getter
+2. Copy .env file: cp .env.example .env
+3. Set the environment variables in .env file
+4. This and all next commands should be run in / project directory. Run migration: php artisan migrate
+5. Run this command to get data from amo api: php artisan update:lead
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+* The second way to get the app with docker&docker-compose tools:
+1. Clone this repository git clone https://github.com/DariaUtkinaEj/amo-leads-getter
+2. Make sure you have docker installed on your local machine, you do not need to have php / postgreSQL / Laravel / webserver installed on your machine
+3. Copy .env file: cp .env.example .env
+4. Set the environment variables in .env file
+5. Run command: docker-compose up --build -d
+6. Run the container in bash mode: docker exec -it php /bin/sh
+7. Inside this container now you can run all the commands as if you are on local environment:
+Run: Install composer dependencies: composer install
+8. Run: php artisan migrate
+9. Run this command: php artisan update:lead
 
-## Laravel Sponsors
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
