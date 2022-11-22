@@ -30,7 +30,8 @@ The task is:
 4. This and all next commands should be run in / project directory. Run migration: php artisan migrate
 5. Run this command to get data from amo api: php artisan update:lead
 
-// using live-server, open server,pgadmin or adminer you can see database with all tables in your browser.
+// Using OpenServer, PgAdmin or Adminer you can see database with all tables in your web browser.
+OR you should RUN this command to check database: pg_dump -U postgres -W postgres > /path/name.sql . Set path and name as you wish.
 
 
 * The second way to get the app with docker&docker-compose tools:
@@ -44,6 +45,7 @@ The task is:
 Run: Install composer dependencies: composer install
 8. Run: php artisan migrate
 9. Run this command: php artisan update:lead
+10. Run this command: pg_dump -U postgres -W postgres > /path/name.sql (or configure Adminer)
 
 
 
